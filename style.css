@@ -1,0 +1,106 @@
+/*****************************Global attributes*********************/
+* {
+    box-sizing: border-box;
+    margin: 0%;
+    padding: 0%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f2f5;
+    font-family: 'Poppings', sans-serif;
+    font-size: 1rem;
+}
+main, footer {
+    width: 80vw;
+}
+h1 {
+    font-size: 2rem;
+    font-weight: 100;
+    color: #fff;
+}
+h2 {
+    font-weight: normal;
+    color: #363f5f;
+    margin-bottom: 1rem;
+}
+h3{
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    font-weight: normal;
+}
+/********************header***********************/
+header{
+    background: #2D4A22;
+    width: 100%;
+    padding: 2rem 0px 8rem;
+    text-align: center;
+
+}
+/****************main**********************/
+/**************cards*******************/
+#balance{
+    margin-top: -7rem;
+}
+#balance h2{
+    color:#fff;
+}
+.card{
+    background-color: #fff;
+    margin-bottom: 1rem;
+    padding: 1rem 1rem 2rem;
+    border-radius: 5px;
+    color: #363f5f;
+}
+#total{
+    background-color: #49AA26;
+    color: #fff;
+}
+.card p{
+    font-size: 2rem;
+}
+/********************table*********************/
+table{
+    width: 100%;
+    border-spacing: 0 1rem;
+    color: #969cb3;
+}
+thead{
+    text-align: left;
+}
+tr th:first-child, tr td:first-child{
+    border-radius: 10px 0 0 10px;
+}
+tbody tr{
+    opacity: 0.8;
+}
+tbody tr:hover{
+    opacity: 1;
+}
+th{
+    background-color: #fff;
+    padding: 1rem 1rem;
+}
+td{
+    background-color: #fff;
+    padding: 1rem 1rem;
+}
+.expense{
+    color: #e92929;
+}
+.income{
+    color: #12a454;
+}
+.description{
+    color: #363f5f;
+}
+/**************footer******************/
+footer{
+    text-align: center;
+    padding: 4rem 0 2rem;
+    color: #363f5f;
+
+    opacity: 0.6;
+}
