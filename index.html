@@ -37,14 +37,16 @@
 
         </section>
 
-        <section>
+        <section id="table-container">
             <h2 class="sr-only">Transações</h2>
+            <a href="#" class="button new">+ Nova transação</a>
                 <table>
                     <thead>
                         <tr>
                             <th>Descrição</th>
                             <th>Valor</th>
                             <th>Data</th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -53,24 +55,46 @@
                             <td class="description">Luz</td>
                             <td class="expense">-R$ 500,00</td>
                             <td class="date">23/01/2021</td>
+                            <td><img src="assets/minus.svg" alt="remover transação"/></td>
                         </tr>
 
                         <tr>
                             <td class="description">Website</td>
                             <td class="income">R$ 5.000,00</td>
                             <td class="date">23/01/2021</td>
+                            <td><img src="assets/minus.svg" alt="remover transação"/></td>
                         </tr>
 
                         <tr>
                             <td class="description">Internet</td>
                             <td class="expense">-R$ 200,00</td>
                             <td class="date">23/01/2021</td>
+                            <td><img src="assets/minus.svg" alt="remover transação"/></td>
                         </tr>
                     </tbody>
 
                 </table>
         </section>
     </main>
+
+    <div class="modal-overlay">
+        <div class="modal">
+            <div class="form">
+                <h2>Nova transação</h2>
+                <form action="">
+                <input type="text" aria-label="Descreva a transação" placeholder="Descrição" id="description-input"/>
+                <input type="number" aria-label="Valor"placeholder="0,00" id="value-input" step="0.01"/>
+                <small class="help">Use o sinal - (negativo) para despesas e , (vírgula) para casas decimais</small>
+                <input type="date" aria-label="Data" id="date"/>
+                    <div class="input-group actions">
+                        <a href="#" class="button cancel">Cancelar</a>
+                        <input type="submit" class="button submit"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     <footer>
         <p>dev.finance$</p>
