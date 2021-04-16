@@ -132,6 +132,7 @@ td{
     align-items: center;
     opacity: 0;
     visibility: hidden;
+    z-index: 1;
 }
 .modal-overlay.active{
     opacity: 1;
@@ -141,6 +142,7 @@ td{
     position: relative;
     background-color: #F0F2f5;
     padding: 2rem 2rem 0.5rem 2rem;
+    border-radius: 5px;
 }
 input{
     display: block;
