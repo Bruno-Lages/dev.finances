@@ -3,13 +3,15 @@ const modal = document.querySelector(".modal-overlay");
 const buttonNew = document.querySelector(".button.new");
 const buttonCancel = document.querySelector(".button.cancel");
 const buttonSubmit = document.querySelector(".button.submit");
+const form = document.querySelector("form");
 //////////////////////add/remove functions////////////////
 const activeModal = () => modal.classList.add("active");
 const removeModal = () => modal.classList.remove("active");
 //////////////////////add/remove buttons////////////////////
 buttonNew.addEventListener("click", activeModal);
 buttonCancel.addEventListener("click", removeModal);
-buttonSubmit.addEventListener("click", e => e.preventDefault())
+buttonCancel.addEventListener("click", clearModalValues);
+form.addEventListener("click", e => e.preventDefault())
 ////////////////////////////////////////////script 2//////////////////////////////////
 
 
@@ -22,9 +24,11 @@ function Transaction(description, value, date) {
 }
 
 buttonSubmit.addEventListener("click", createTransaction);
-buttonSubmit.addEventListener("click", cleanTransactions);
+buttonSubmit.addEventListener("click", clearTransactions);
 buttonSubmit.addEventListener("click", removeModal);
 buttonSubmit.addEventListener("click", updateTransactions);
+buttonSubmit.addEventListener("click", clearModalValues);
+buttonSubmit.addEventListener("click", updateDisplays);
 
 
 function createTransaction() {
@@ -56,6 +60,7 @@ function createTrStructure(newRow, object){
     newRow.append(descriptionTd);
     let valueTd = document.createElement("td");
     valueTd.textContent = object.value;
+    valueTd.setAttribute("class", object.value >= 0? "income" : "expense");
     checkValue(valueTd);
     newRow.append(valueTd);
     let dateTd = document.createElement("td");
@@ -70,11 +75,9 @@ function createTrStructure(newRow, object){
 
 function checkValue(value){
         if (Number(value.textContent) >= 0){
-            value.setAttribute("class", "income");
             value.textContent = `R$ ${value.textContent}`;
             return value;
         }
-        value.setAttribute("class", "expense"); 
         let number = value.textContent.split("");    
         let lessSignal = number.indexOf("-");
         number.splice(lessSignal, 1);
@@ -83,9 +86,53 @@ function checkValue(value){
         return value;
     };
 
-function cleanTransactions(){
+function clearTransactions(){
     let tbody = document.querySelector("tbody");
     while (tbody.firstChild){
         tbody.removeChild(tbody.firstChild);
     }
 }
+
+function clearModalValues(){
+    const description = document.querySelector("#description-input");
+    const value = document.querySelector("#value-input");
+    const date = document.querySelector("#date-input");
+
+    description.value = "";
+    value.value = "";
+    date.value = "";
+}
+
+function updateDisplays(){
+    const incomesDisplay = document.querySelector("#incomesDisplay");
+    const expensesDisplay = document.querySelector("#expensesDisplay");
+    const totalDisplay = document.querySelector("#totalDisplay");
+
+    incomesDisplay.textContent =`R$ ${incomes(transactionsHistory)}`;
+    expensesDisplay.textContent = `R$ ${expenses(transactionsHistory)}`;
+    totalDisplay.textContent = `R$ ${total(transactionsHistory)}`;
+}
+    
+    function incomes(array){
+        let income = array.filter((transaction) => transaction.value >= 0 );
+        income = income.reduce((amount, transaction) => {
+            amount += Number(transaction.value);
+            return amount;
+        }, 0);
+        return income;
+    }    
+
+    function expenses(array){
+        let expense = array.filter(transaction => transaction.value < 0);
+        expense = expense.reduce((amount, transaction) => {
+            amount += Number(transaction.value);
+            return amount
+        }, 0);
+        return expense;
+    }
+
+    function total(array){
+        const total = incomes(array) + expenses(array);
+        console.log(total);
+        return total;
+    }
