@@ -23,12 +23,20 @@ function Transaction(description, value, date) {
     this.date = date;
 }
 
-buttonSubmit.addEventListener("click", createTransaction);
-buttonSubmit.addEventListener("click", clearTransactions);
-buttonSubmit.addEventListener("click", removeModal);
-buttonSubmit.addEventListener("click", updateTransactions);
-buttonSubmit.addEventListener("click", clearModalValues);
-buttonSubmit.addEventListener("click", updateDisplays);
+buttonSubmit.addEventListener("click", () => {
+    try{
+        checkFields()
+        buttonSubmit.addEventListener("click", createTransaction);
+        buttonSubmit.addEventListener("click", clearTransactions);
+        buttonSubmit.addEventListener("click", removeModal);
+        buttonSubmit.addEventListener("click", updateTransactions);
+        buttonSubmit.addEventListener("click", clearModalValues);
+        buttonSubmit.addEventListener("click", updateDisplays);
+    }
+    catch(e){
+        alert(e.message);
+    }
+});
 
 
 function createTransaction() {
@@ -37,23 +45,21 @@ function createTransaction() {
     const date = document.querySelector("#date-input").value;
 
     const newObject = new Transaction(description, value, date);
-    console.log(newObject);
     transactionsHistory.push(newObject);
-    console.log(transactionsHistory);
 }
 
 function updateTransactions(){
-    transactionsHistory.forEach(object => createRow(object));
+    transactionsHistory.forEach((object, index) => createRow(object, index));
 }
 
-function createRow(object){
+function createRow(object, index){
     const tbody = document.querySelector("tbody");
     const newRow = document.createElement("tr");
     tbody.append(newRow);
-    createTrStructure(newRow, object);
+    createTrStructure(newRow, object, index);
 }
 
-function createTrStructure(newRow, object){
+function createTrStructure(newRow, object, index){
     let descriptionTd = document.createElement("td");
     descriptionTd.textContent = object.description;
     descriptionTd.setAttribute("class", "description")
@@ -65,9 +71,10 @@ function createTrStructure(newRow, object){
     newRow.append(valueTd);
     let dateTd = document.createElement("td");
     dateTd.textContent = object.date;
+    formatDate(dateTd);
     newRow.append(dateTd);
     let minusTd = document.createElement("td");
-    minusTd.innerHTML = '<img src="assets/minus.svg" alt="remover transação"/>';
+    minusTd.innerHTML = `<img src="assets/minus.svg" alt="remover transação" onclick="deleteTransaction(${index})" />`;
     minusTd.setAttribute("class", "date");
     newRow.append(minusTd);
 
@@ -128,11 +135,34 @@ function updateDisplays(){
             amount += Number(transaction.value);
             return amount
         }, 0);
+        expense *= -1;
         return expense;
     }
 
     function total(array){
-        const total = incomes(array) + expenses(array);
-        console.log(total);
+        const total = incomes(array) - expenses(array);
         return total;
     }
+
+function checkFields(){
+    const description = document.querySelector("#description-input").value;
+    const value = document.querySelector("#value-input").value;
+    const date = document.querySelector("#date-input").value;
+
+    if (description.trim() === "" || value.trim() === "" || !date){
+        throw new Error("Verifique todos os campos");
+    }
+}
+
+function formatDate(date){
+    let newDate = date.textContent.split("-");
+    date.textContent = `${newDate[2]}/${newDate[1]}/${newDate[0]}`;
+    return date;
+}
+
+function deleteTransaction(index){
+    transactionsHistory.splice(index, 1);
+    clearTransactions();
+    updateTransactions();
+    updateDisplays();
+}
