@@ -15,7 +15,18 @@ form.addEventListener("click", e => e.preventDefault())
 ////////////////////////////////////////////script 2//////////////////////////////////
 
 
-const transactionsHistory = [];
+let transactionsHistory = [];
+
+function setHistory(){
+    const json = JSON.stringify(transactionsHistory);
+    const setLocalStorage = localStorage.setItem("history", json);
+}
+
+function getHistory(){
+    const getHistory = localStorage.getItem("history");
+    transactionsHistory = JSON.parse(getHistory) || [];
+}
+updateTransactions();
 
 function Transaction(description, value, date) {
     this.description = description;
@@ -31,7 +42,6 @@ buttonSubmit.addEventListener("click", () => {
         buttonSubmit.addEventListener("click", removeModal);
         buttonSubmit.addEventListener("click", updateTransactions);
         buttonSubmit.addEventListener("click", clearModalValues);
-        buttonSubmit.addEventListener("click", updateDisplays);
     }
     catch(e){
         alert(e.message);
@@ -46,10 +56,13 @@ function createTransaction() {
 
     const newObject = new Transaction(description, value, date);
     transactionsHistory.push(newObject);
+    setHistory();
 }
 
 function updateTransactions(){
+    getHistory();
     transactionsHistory.forEach((object, index) => createRow(object, index));
+    updateDisplays();
 }
 
 function createRow(object, index){
@@ -163,6 +176,7 @@ function formatDate(date){
 function deleteTransaction(index){
     transactionsHistory.splice(index, 1);
     clearTransactions();
+    setHistory();
     updateTransactions();
     updateDisplays();
 }
