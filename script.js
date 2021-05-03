@@ -9,8 +9,10 @@ const activeModal = () => modal.classList.add("active");
 const removeModal = () => modal.classList.remove("active");
 //////////////////////add/remove buttons////////////////////
 buttonNew.addEventListener("click", activeModal);
+buttonNew.addEventListener("click", e => e.preventDefault());
 buttonCancel.addEventListener("click", removeModal);
 buttonCancel.addEventListener("click", clearModalValues);
+buttonCancel.addEventListener("click", e => e.preventDefault());
 form.addEventListener("click", e => e.preventDefault())
 ////////////////////////////////////////////script 2//////////////////////////////////
 
@@ -131,6 +133,7 @@ function updateDisplays(){
     incomesDisplay.textContent =`R$ ${incomes(transactionsHistory)}`;
     expensesDisplay.textContent = `R$ ${expenses(transactionsHistory)}`;
     totalDisplay.textContent = `R$ ${total(transactionsHistory)}`;
+    setTotalColor();
 }
     
     function incomes(array){
@@ -179,4 +182,41 @@ function deleteTransaction(index){
     setHistory();
     updateTransactions();
     updateDisplays();
+}
+
+function setTotalColor(){
+    const totalCard = document.querySelector("#total");
+    const totalDisplay = document.querySelector("#totalDisplay");
+    if (total(transactionsHistory) < 0){
+        totalCard.classList.add("negative-value");
+    }else if (total(transactionsHistory) >= 0){
+        totalCard.classList.remove("negative-value");
+    }
+}
+
+////////////////////////dark mode//////////////////////
+const darkModeButton = document.querySelector("#dark-mode-button");
+
+darkModeButton.addEventListener("click", setDarkMode);
+
+function setDarkMode(){
+    setColor('body', 1, 'background-dark-mode');
+    setColor('header', 1, 'header-dark-mode');
+    setColor('td', 2, 'dark-mode');
+    setColor('th', 2, 'gray-dark-mode');
+    setColor('.card', 2, 'gray-dark-mode');
+    setColor('.total', 2, 'color-dark-mode');
+    setColor('.modal', 1, 'background-dark-mode');
+    setColor('input', 2, 'dark-mode');
+    setColor('small', 1, 'color-dark-mode');
+    setColor('.text', 2, 'color-dark-mode');
+}
+
+function setColor(element, quantity, className){
+    const elementLocalization = quantity > 1? document.querySelectorAll(element) : document.querySelector(element);
+    if (quantity > 1){
+        elementLocalization.forEach(actualElement => actualElement.classList.toggle(className));
+    } else {
+        elementLocalization.classList.toggle(className);
+    }
 }

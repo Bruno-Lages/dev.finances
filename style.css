@@ -44,7 +44,7 @@ a:hover{
 }
 /********************header***********************/
 header{
-    background: #2D4A22;
+    background: #2d4a22; 
     width: 100%;
     padding: 2rem 0px 6rem;
     text-align: center;
@@ -75,6 +75,9 @@ h3{
     background-color: #49AA26;
     color: #fff;
 }
+#total.negative-value{
+    background-color: #e92929;
+}
 .card p{
     font-size: 2rem;
 }
@@ -86,6 +89,7 @@ table{
     width: 100%;
     border-spacing: 0 1rem;
     color: #969cb3;
+    white-space: nowrap;
 }
 thead{
     text-align: left;
@@ -95,7 +99,7 @@ tr th:first-child, tr td:first-child{
 }
 tr th:last-child, tr td:last-child{
     border-radius: 0 10px 10px 0;
-    padding-right: 0;
+    padding-right: 1rem;
 }
 tbody tr{
     opacity: 0.8;
@@ -184,15 +188,46 @@ small{
 .button.cancel:hover{
     opacity: 1;
 }
+/**************dark mode**************/
+#dark-mode-button{
+    height: 3rem;
+    width: 3rem;
+    position: fixed;
+    right: 5vw;
+    bottom: 5vh;
+    background-color: #0a2842e8;
+    border-radius: 50%;
+    padding: 10px;
+}
+#dark-mode-button img{
+    width: 100%;
+    height: 100%;
+}
+.background-dark-mode{
+    background-color: #121212;
+}
+.header-dark-mode{
+    background-color: #1e2b19;
+}
+.dark-mode{
+    background-color: #171616;
+    color: #a2a2a2;
+}
+.gray-dark-mode{
+    background-color: #1f1f1f;
+    color: #ffffffb8;
+}
+.color-dark-mode{
+    color: #ffffffb8;
+}
 /**************footer******************/
 footer{
     text-align: center;
     padding: 4rem 0 2rem;
     color: #363f5f;
-
+    font-size: smaller;
     opacity: 0.6;
 }
-
 /************queries*******************/
 @media screen and (min-width: 800px){
     main, footer {
