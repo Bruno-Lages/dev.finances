@@ -40,9 +40,8 @@ buttonSubmit.addEventListener("click", () => {
     try{
         checkFields()
         buttonSubmit.addEventListener("click", createTransaction);
-        buttonSubmit.addEventListener("click", clearTransactions);
+        buttonSubmit.addEventListener("click", orderTransactions);
         buttonSubmit.addEventListener("click", removeModal);
-        buttonSubmit.addEventListener("click", updateTransactions);
         buttonSubmit.addEventListener("click", clearModalValues);
     }
     catch(e){
@@ -210,6 +209,8 @@ function setDarkMode(){
     setColor('input', 2, 'dark-mode');
     setColor('small', 1, 'color-dark-mode');
     setColor('.text', 2, 'color-dark-mode');
+    setColor('.order', 1, 'gray-dark-mode');
+    setColor('option', 2, 'color-dark-mode');
 }
 
 function setColor(element, quantity, className){
@@ -219,4 +220,59 @@ function setColor(element, quantity, className){
     } else {
         elementLocalization.classList.toggle(className);
     }
+}
+
+const order = document.querySelector('.order');
+
+order.addEventListener("change", () => orderTransactions());
+
+function orderTransactions(){
+    switch (order.value){
+    case "lowest":
+            transactionsHistory = transactionsHistory.sort((object1, object2) => object1.value - object2.value);
+            setHistory();
+            clearTransactions();
+            updateTransactions();
+            break;
+    case "highest":
+        transactionsHistory = transactionsHistory.sort((transaction1, transaction2) => (transaction1.value - transaction2.value) * -1);
+        setHistory();
+        clearTransactions();
+        updateTransactions();
+        break;
+    case "oldest":
+        orderDate(transactionsHistory, 1);
+        setHistory();
+        clearTransactions();
+        updateTransactions();
+        break;
+    case "newest":
+        orderDate(transactionsHistory, -1);
+        setHistory();
+        clearTransactions();
+        updateTransactions();
+        break;
+    default: 
+        clearTransactions();
+        updateTransactions();
+        break;
+    }
+}
+
+
+
+
+
+function orderDate(array, multiplicator){
+array.sort(
+    (transaction1, transaction2) => {
+        let day = (Number(transaction1.date.split('-')[2]) - Number(transaction2.date.split('-')[2])) * multiplicator;
+
+        let mounth = Number(transaction1.date.split('-')[1]) - Number(transaction2.date.split('-')[1])? (Number(transaction1.date.split('-')[1]) - Number(transaction2.date.split('-')[1])) * multiplicator : day;
+
+        let year = Number(transaction1.date.split('-')[0]) - Number(transaction2.date.split('-')[0])? (Number(transaction1.date.split('-')[0]) - Number(transaction2.date.split('-')[0])) * multiplicator : mounth;
+        
+        return year;
+    }
+)
 }

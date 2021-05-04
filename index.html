@@ -39,7 +39,16 @@
 
         <section id="table-container">
             <h2 class="sr-only">Transações</h2>
-            <a href="#" class="button new">+ Nova transação</a>
+            <div class="options-container">
+                <a href="#" class="button new">+ Nova transação</a>
+                <select name="order by" class="order" aria-label="Ordenar por:">
+                    <option value="">Ordenar</option>
+                    <option value="newest" aria-label="Ordenar por mais novos">Ordenar por mais novos</option>
+                    <option value="oldest" aria-label="Ordenar por mais antigos">Ordenar por mais antigos</option>
+                    <option value="highest" aria-label="Ordenar por valores mais altos">Ordenar por valores mais altos</option>
+                    <option value="lowest" aria-label="Ordenar por valores mais baixos">Ordenar por valores mais baixos</option>
+                </select>
+            </div>
                 <table>
                     <thead>
                         <tr>
@@ -84,4 +93,4 @@
     </footer>
     <script src="script.js"></script>
 </body>
-</html>
+</html

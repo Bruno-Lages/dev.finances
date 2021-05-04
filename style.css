@@ -12,6 +12,7 @@ body {
     background-color: #f0f2f5;
     font-family: 'Poppings', sans-serif;
     font-size: 1rem;
+    transition: background-color ease 0.9s;
 }
 main, footer {
     width: 90vw;
@@ -42,13 +43,30 @@ a:hover{
 .button{
     cursor: pointer;
 }
+.options-container{
+    display: flex;
+    justify-content: space-between;
+}
+.order{
+    width: 40%;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    color: #363f5f;
+    font-weight: bold;
+}
+option{
+    font-size: 'Poppings', sans-serif;
+    color: #363f5f;
+    font-weight: bold
+}
 /********************header***********************/
 header{
     background: #2d4a22; 
     width: 100%;
     padding: 2rem 0px 6rem;
     text-align: center;
-
+    transition: background-color 0.9s ease;
 }
 /****************main**********************/
 /**************cards*******************/
@@ -70,6 +88,8 @@ h3{
     padding: 1rem 1rem 2rem;
     border-radius: 5px;
     color: #363f5f;
+    transition: background-color ease 1s;
+    transition: color ease 1s;
 }
 #total{
     background-color: #49AA26;
@@ -110,16 +130,20 @@ tbody tr:hover{
 th{
     background-color: #fff;
     padding: 1rem 1rem;
+    transition: background-color ease 0.9s;
+    transition: color ease 1s;
 }
 td{
     background-color: #fff;
     padding: 1rem 1rem;
+    transition: background-color ease 1s;
+    transition: color ease 1.2s;
 }
 .expense{
-    color: #e92929;
+    color: #e92929 !important;
 }
 .income{
-    color: #12a454;
+    color: #12a454 !important;
 }
 .description{
     color: #363f5f;
@@ -205,20 +229,27 @@ small{
 }
 .background-dark-mode{
     background-color: #121212;
+    transition: background-color ease 1s;
 }
 .header-dark-mode{
     background-color: #1e2b19;
+    transition: background-color ease 1s;
 }
 .dark-mode{
     background-color: #171616;
     color: #a2a2a2;
+    transition: background-color ease 1s;
+    transition: color ease 1s;
 }
 .gray-dark-mode{
     background-color: #1f1f1f;
     color: #ffffffb8;
+    transition: background-color ease 1s;
+    transition: color ease 1s;
 }
 .color-dark-mode{
     color: #ffffffb8;
+    transition: color ease 1s;
 }
 /**************footer******************/
 footer{
@@ -237,5 +268,8 @@ footer{
         display: grid;
         grid-template-columns: repeat(3,1fr);
         gap: 1.5rem;
+    }
+    .order{
+        width: auto;
     }
 }
