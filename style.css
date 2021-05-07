@@ -222,6 +222,7 @@ small{
     background-color: #0a2842e8;
     border-radius: 50%;
     padding: 10px;
+    cursor: pointer;
 }
 #dark-mode-button img{
     width: 100%;
