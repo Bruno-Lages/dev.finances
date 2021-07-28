@@ -16,7 +16,7 @@
 
 <a name="about"></a>
 ## 💻 About the application
-Dev.finances is a financial control application, where you can register and delete transactions and see the incoming and outgoing balance. Based in the <a href="https://github.com/rocketseat-education/maratona-discover-01">Rocketseat's Dicover Project</a>.
+Dev.finances is a financial control application, where you can register and delete transactions and see the incoming and outgoing balance. Based in the <a href="https://github.com/rocketseat-education/maratona-discover-01">Rocketseat's Dicover Project</a>. You can Check the result <a href="https://bruno-lages.github.io/dev.finances/" targer="_blank">here</a>.
 
 <a name="features"></a>
 ## ⚙️ Features 
