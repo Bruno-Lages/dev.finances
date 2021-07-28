@@ -74,22 +74,31 @@ function createRow(object, index){
 }
 
 function createTrStructure(newRow, object, index){
+    const thead = document.querySelectorAll('thead tr th');
+
     let descriptionTd = document.createElement("td");
     descriptionTd.textContent = object.description;
     descriptionTd.setAttribute("class", "description")
+    if (thead[0].className == 'gray-dark-mode') descriptionTd.setAttribute("class", "dark-mode")
     newRow.append(descriptionTd);
+
     let valueTd = document.createElement("td");
     valueTd.textContent = object.value;
     valueTd.setAttribute("class", object.value >= 0? "income" : "expense");
     checkValue(valueTd);
+    if (thead[0].className == 'gray-dark-mode') valueTd.classList.add("dark-mode");
     newRow.append(valueTd);
+
     let dateTd = document.createElement("td");
     dateTd.textContent = object.date;
     formatDate(dateTd);
+    if (thead[0].className == 'gray-dark-mode') dateTd.setAttribute("class", "dark-mode");
     newRow.append(dateTd);
+
     let minusTd = document.createElement("td");
     minusTd.innerHTML = `<img src="assets/minus.svg" alt="remover transação" onclick="deleteTransaction(${index})" />`;
     minusTd.setAttribute("class", "date");
+    if (thead[0].className == 'gray-dark-mode') minusTd.setAttribute("class", "dark-mode");
     newRow.append(minusTd);
 
 }
